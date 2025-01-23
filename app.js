@@ -60,7 +60,7 @@ const { mongoose } = require('mongoose');
 const PORT = 1204;
 app.use(express.json());
 const { v4 : uuidv4 } = require('uuid');
-const mongourl = "mongodb://127.0.0.1:27017/practise";
+const mongourl = "mongodb+srv://praneshkumarn2023it:Pranesh26112005@cluster0.alkpr.mongodb.net/practice";
 
 mongoose.connect(mongourl)
     .then(() => {
@@ -86,7 +86,7 @@ app.post("/api/expense", async (req, res) => {
     res.status(200).json(savedExpense);
 });
 
-app.get("/api/expenses", async (req, res) => {
+app.get("/api/expense", async (req, res) => {
     try {
         const expenses = await expenseModel.find({});
         res.status(200).json(expenses);
@@ -95,7 +95,7 @@ app.get("/api/expenses", async (req, res) => {
     }
 });
 
-app.get("/api/expenses/:id", async (req, res) => {
+app.get("/api/expense/:id", async (req, res) => {
     try {
         const { id }=req.params;
         const expenses = await expenseModel.findOne({id});
@@ -104,7 +104,7 @@ app.get("/api/expenses/:id", async (req, res) => {
         res.status(500).json({ error: "Failed to fetch expenses", details: err });
     }
 });
-app.put("/api/expenses/:id", async (req, res) => {
+app.put("/api/expense/:id", async (req, res) => {
     const { id } = req.params;
     const { title, amount } = req.body;
     const updatedExpense = await expenseModel.findOneAndUpdate(
@@ -119,7 +119,7 @@ app.put("/api/expenses/:id", async (req, res) => {
   
     res.status(200).json(updatedExpense);
   });
-  app.delete("/api/expenses/:id", async (req, res) => {
+  app.delete("/api/expense/:id", async (req, res) => {
     try {
       const { id } = req.params;
       const expenses = await expenseModel.deleteOne({id});
